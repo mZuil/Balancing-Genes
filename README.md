@@ -11,8 +11,11 @@ Esta acción se puede realizar desde cualquier directorio.
 
 Para la ejecución son necesarias las librerías de numpy y de Django, para las cuales es necesario introducir desde la terminal (CMD):
 
- pip install numpy
- python -m pip install Django
+Para numpy:
+pip install numpy
+ 
+Para Django:
+python -m pip install Django
 
 
 --------------------------------------------------------------EJECUCION-----------------------------------------------------------------
