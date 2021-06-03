@@ -1,0 +1,337 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset=utf-8>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Nombre de la ventana -->
+    <title>Balancing Genes</title>
+
+    <!-- Icono de la pestaña -->
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+
+    <!-- Fuente Roboto -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet'
+        type='text/css'>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet" type='text/css'>
+
+    <!-- Importo BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <!-- Importo el css que utilizare -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/slides.css' %}" />
+
+    <!-- Para los iconos pequeños -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+</head>
+
+<body>
+    <div class="navbar sticky-top">
+        <div class="navbar-inner">
+            <!-- Logo -->
+            <a href="#" class="brand"> <img src="{% static 'images/ico/favicon.ico' %}" width="50" height="50"
+                    alt="Logo" /> </a>
+
+            <!-- Elementos para navegar -->
+            <div id="texto" class="nav-collapse">
+                <ul class="nav" id="top-navigation">
+                    <li class="home"><a href="#inicio">Introducción</a></li>
+                    <li class="aplicacion"><a href="#app">Aplicación</a></li>
+                    <li class="miembros"><a href="#participantes">Miembros del grupo</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTRODUCCIÓN -->
+    <section class="section primary-section" id="inicio">
+        <!--<hr size= "10">-->
+        <div class="title">
+            <h1>Introducción</h1>
+        </div>
+        <p> Balancing Genes es un software de modelización, diseñado con el objetivo de optimizar la producción de cadenas de montaje. <br> <br>
+            Especificando diversos aspectos como el número de estaciones, tareas o prioridades, Balancing Genes emplea herramientas informáticas de modelización para simular el funcionamiento de la cadena; modificando parámetros y aprendiendo de sus intentos, hasta llegar a la solución óptima. <br> <br>
+            Dicha solución será la distribución ideal de las tareas en sus respectivas estaciones de modo que se obtenga la producción más eficiente, es decir, más producto en menos tiempo.
+        </p>
+    </section>
+
+
+    <!-- SLIDES-->
+    <section class="section" id="app">
+        
+        <div class="slideshow-container">
+
+            <div class="mySlides" style="height: 1200px;">
+                        <h2>Introduzca los datos del problema: </h2><br>
+                            <div style="text-align: left; position: relative; left: 30%;">
+                            <form action="/buscar/" method="POST" class = "grid-segundo" enctype="multipart/form-data">
+                                <p>Número de estaciones:</p>
+                                <p><input type="number" value="3" name="estaciones" min="1" style=" position: relative; width: 200px;" max="20" required></p>
+                                <p>Tamaño de la población: </p>
+                                <p><input type="number" value="200" name="poblacion" min="1" style=" position: relative; width: 200px;" required></p>
+
+                                <p>Tipo de función de evaluación:</p>
+                                <p>
+                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="tipoFuncionEv"
+                                        style="position: relative; width: 200px;">
+                                        <option value="max_min" selected>Máximo-Mínimo</option>
+                                        <option value="var">Con varianza</option>
+                                        <option value="var_max">Máximo de varianza</option>
+                                        <option value="max">Máximo</option>
+                                    </select>
+                                </p>
+
+                                <p>Tipo de cruce:</p>
+                                <p>
+                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="tipoCruce"
+                                        style="position: relative; width: 200px;">
+                                        <option value="uniform">Uniforme</option>
+                                        <option value="one_point">Unipuntual</option>
+                                        <option value="two_points" selected>Dos puntos</option>
+                                    </select>
+                                </p>
+
+                                <p>Probabilidad de cruce:</p>
+                                <p><input value="0.7" type="number" step="0.001" min="0" max="1" name="cruce" style="position: relative; width: 200px;" required></p>
+
+                                <p>Tipo de mutación: </p>
+                                <p>
+                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="tipoMut"
+                                        style="position: relative; width: 200px;">
+                                        <option value="inc-dec">Incremento/decremento</option>
+                                        <option value="random" selected>Aleatorio</option>
+                                    </select>
+                                </p>
+                                <p>Probabilidad de mutación: </p>
+                                <p><input value="0.005" type="number" step="0.0001" min="0" max="1" name="mutacion" style="position: relative; width: 200px;" required></p>
+
+                                <p>Mecanismo de selección:</p>
+                                <p>
+                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="seleccion"
+                                        style="position: relative; width: 200px;">
+                                        <option value="tournament">Torneo</option>
+                                        <option value="roulette">Ruleta</option>
+                                    </select>
+                                </p>
+                                <p>Ratio de élite: </p>
+                                <p><input type="number"  value="0.2" type="number" step="0.001" min="0" max="1" name="elite" style=" position: relative; width: 200px;" required></p>
+
+                                <p>Semilla:</p> 
+                                <p><input type="number" value={{num}} name="semilla" min="0" style=" position: relative; width: 200px;" required></p>
+
+                                <p>Condiciones de parada:</p><p></p>
+                                
+                                    <div class="form-check">
+                                        <p><input type="checkbox" class="form-check-input" id="maxIter" onclick="sacarmax('maxIterInput')">Máximo de iteraciones</p>                                        
+                                    </div>
+                                    <div id = "maxIterInput" style="visibility: hidden;">
+                                        <p><input type="number" value="10000" name="iteraciones" min="0" style=" position: relative; width: 200px;"> iteraciones</p>
+                                    </div>
+                                    <div class="form-check">
+                                        <p><input type="checkbox" class="form-check-input" id="maxSeg" onclick="sacarmax('maxSegInput')">Máximo de segundos</p>
+                                    </div>
+                                    <div id = "maxSegInput" style="visibility: hidden;">
+                                        <p><input type="number" value="300" name="segundos" min="0" style=" position: relative; width: 200px;"> segundos</p>
+                                    </div>
+                                    <div class="form-check">
+                                        <p><input type="checkbox" class="form-check-input" onclick="sacarmax('difPorcentual')"> Diferencia porcentual</p>
+                                    </div>
+                                    <div id = "difPorcentual" style="visibility: hidden;">
+                                        <p><input type="number" value="5" name="porcentaje" min="0" style=" position: relative; width: 200px;" max = 100> %</p>
+                                    </div>
+                                
+
+                                <p>Datos del problema (.IN2):</p>
+                                {% csrf_token %}
+                                <p><input type="file" name = "archivoIN" class="form-control-file" id="exampleFormControlFile1" accept = ".IN2" required> </p>
+                        </div>
+                                <input class = "button" type="submit" value="Enviar" onclick="showPopUP()">
+                                <div id="MyHiddenBox" style="display:none">
+                                    <input type ="number" id="usamaxIterInput" name="usaElmaxIterInput" value="0">
+                                    <input type ="number" id="usamaxSegInput" name="usaElmaxSegInput" value="0">
+                                    <input type ="number" id="usadifPorcentual" name="usaEldifPorcentual" value="0">
+                                </div>
+                                    </form>
+                    </div>
+
+            <div class="mySlides" style="height: 1850px;">
+                
+                <h2>Panel de ayuda:</h2>
+                <div style="position: relative; right: 70px;">
+                <br>
+                <div class = "ayuda">
+                    <p>Para probar esta aplicacion necesitará introducir los siguientes campos: </p>
+                    <p><b style="font-weight:bold">Número de estaciones:</b> En cuántas fases se repartirá la distribución de tareas </p>
+                    <p><b style="font-weight:bold">Tamaño de población:</b> Número inicial de individuos con el que se desea comenzar el algoritmo</p>
+                    <p><b style="font-weight:bold">Función de evaluación:</b></p>
+                        <ul> 
+                            <li>Máximo-Mínimo: Minimizar la diferencia entre el tiempo máximo y mínimo de las estaciones</li> 
+                            <li>Máximo : Minimizar el tiempo máximo de las estaciones</li> 
+                            <li>Varianza: Minimizar la varianza entre las estaciones</li> 
+                            <li>Máximo Varianza: Suma de la varianza y el máximo al cuadrado, de forma que se tengan en cuenta ambas</li> 
+                        </ul> 
+                    <p><b style="font-weight:bold">Tipo de cruce:</b> </p>
+                        <ul> 
+                            <li>Un punto: Se selecciona al azar una posición de cruce y se intercambian las subcadenas situadas a la derecha de esta posición de ambos padres</li> 
+                            <li>Dos puntos: Cortar en dos puntos e ir alternando los cromosomas de los padres cuando se llegan a dichos puntos</li> 
+                            <li>Uniforme: En cada posición del cromosoma se hereda un gen de los padres, pudiendo ser de cualquiera de ellos</li> 
+                        </ul> 
+                    <p><b style="font-weight:bold">Probabilidad de cruce:</b> Probabilidad de que, dada una pareja de individuos, estos se reproduzcan </p>
+                    <p><b style="font-weight:bold">Tipo de mutación:</b> </p>
+                        <ul> 
+                            <li>Aleatorio: Si un gen muta, se le asigna cualquier estación</li> 
+                            <li>Incremento/Decremento: Si un gen muta, se le asigna una estación más o una estación menos de la que previamente tenía</li>  
+                        </ul> 
+                    <p><b style="font-weight:bold">Probablidad de mutación:</b> Qué probabilidad tiene un individuo de mutar tras nacer</p>
+                    <p><b style="font-weight:bold">Mecanismo de selección:</b></p>
+
+                    <ul> 
+                        <li>Torneo: Se organiza una competición entre los distintos individuos y se seleccionan a los ganadores </li> 
+                        <li>Ruleta: Se seleccionan a los individuos con una probabilidad proporcional al valor obtenido por su función de evaluación </li> 
+                    </ul> 
+
+                    <p><b style="font-weight:bold">Ratio de élite:</b> Representa el porcentaje de los mejores individuos que se mantienen de la generación anterior</p>
+                    <p><b style="font-weight:bold">Semilla:</b> Se utiliza a la hora de generar números aleatorios, para repetir un proceso repetir la semilla</p>
+                    <p><b style="font-weight:bold">Condición de parada:</b></p>
+                        <ul> 
+                            <li>Iteraciones: El algoritmo se detiene cuando llega a un cierto número de iteraciones </li> 
+                            <li>Tiempo: El algoritmo se detiene cuando llega a un cierto número de segundos</li> 
+                            <li>Diferencia al objetivo: Podemos calcular cuál es la solución ideal y determinar que el programa se detenga cuando esté lo suficientemente cerca de esta</li> 
+                        </ul> 
+
+                    <p><b style="font-weight:bold">La matriz de precedencia</b>, en un archivo .IN2, contendrá lo siguiente:
+                        <button id = "botonPrec" class="fa fa-question-circle" onclick="showInfo()"></button>
+                    </p>
+                    <ul> 
+                        <li>En la primera línea tendremos el número de tareas. </li> 
+                        <li>A continuación, cada línea nos indicará los tiempos de cada estación.</li> 
+                        <li>Finalmente añadiremos la precedencia.</li> 
+                    </ul> 
+
+                </div>
+            </div>
+                        
+            </div>
+
+                <a class="prev" onclick="plusSlides(-1)">❮</a>
+                <a class="next" onclick="plusSlides(1)">❯</a>
+
+        </div>
+
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
+
+    </section>
+
+
+
+    <!-- Service section start -->
+    <div class="section third-section" id="participantes" style="margin-top: -50px;">
+        <div class="container centered">
+            <div class="title">
+                <h1>Quiénes somos</h1>
+            </div>
+
+            <div class="row">
+                <div class="column centered">
+                    <img src="{% static 'images/foto_inigo.jpeg' %}" alt="Iñigo Araluce" class="avatar" width="200px" ,
+                        heigth="200px">
+                    <span style="">
+                        <h3 class="nombre">Iñigo Araluce Goded</h3>
+                        <h4 class="matricula">a18m022</h4>
+                    </span>
+                </div>
+
+                <div class="column centered">
+                    <img src="{% static 'images/foto_nina.jpeg' %}" alt="Nina Aranda" class="avatar" width="200px" ,
+                        heigth="200px">
+                    <span style="">
+                        <h3 class="nombre">Nina Aranda Font</h3>
+                        <h4 class="matricula">b19m054</h4>
+                    </span>
+                </div>
+
+                <div class="column centered">
+                    <img src="{% static 'images/foto_victor.jpg' %}" alt="Víctor Berrozpe" class="avatar" width="200px"
+                        , heigth="200px">
+                    <span style="">
+                        <h3 class="nombre">Víctor Berrozpe Maldonado</h3>
+                        <h4 class="matricula">a18m068</h4>
+                    </span>
+                </div>
+
+                <div class="column centered">
+                    <img src="{% static 'images/foto_maria.jpg' %}" alt="María Zuil" class="avatar" width="200px" ,
+                        heigth="200px">
+                    <span style="">
+                        <h3 class="nombre">María Zuil González</h3>
+                        <h4 class="matricula">a18m030</h4>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p> Trabajo de modelización 2020-2021. Grupo A4</p>
+    </div>
+
+    <!--Pop-up de cargando...-->
+    <div id="popUp" style="display: none;">
+        <h3>Cargando...</h3>
+        <hr>
+        <p>Espere mientras encontramos una solución óptima para su problema.</p>
+        <!--<img class = "carga" src="{% static 'images/loading.gif' %}" alt="Cargando" width="250px" heigth="250px">-->
+        <!--<img class = "carga" src="{% static 'images/loading2.gif' %}" alt="Cargando" width="250px" heigth="250px" style="margin-top:-40px">-->
+        <!--<img class = "carga" src="{% static 'images/loading3.gif' %}" alt="Cargando" width="150px" heigth="150px" style="margin-top:-20px">-->
+        <img class = "carga" src="{% static 'images/loading4.gif!w340' %}" alt="Cargando" width="200px" heigth="200px" style="margin-top:-20px">
+        <!--<p>La funcion esta en services.js y el estilo en style.css, aunque no esten todos los campos rellenos esto sale (Y todavia está feito)</p>-->
+    </div>
+
+    <!--Pop-up de info IN2-->
+    <div id="infoIN2" style="display: none;">
+        <h3>Estructura del archivo .IN2  <button id = "closeButton" type="button" class="fa fa-window-close" onclick="cerrarCuadro()"></h3>
+        <hr>
+        <div class ="grid">
+            <p> 5 </p> <p>→ Número de tareas que tendremos</p>
+            <p> 4 </p> <p style="position: relative; right: 30px;">→ Tiempo de la primera tarea</p>
+            <p> 3 </p> <p style="position: relative; right: 25px;">→ Tiempo de la segunda tarea</p>
+            <p> 9 </p> <p style="position: relative; right: 32px;">→ Tiempo de la tercera tarea</p>
+            <p> 5 </p> <p style="position: relative; right: 35px;">→ Tiempo de la cuarta tarea</p>
+            <p> 9 </p> <p style="position: relative; right: 35px;">→ Tiempo de la quinta tarea</p>
+            <p> 1,2 </p> <p>→ Precedencia: antes de ejecutar 2ª tarea hay que ejecutar 1ª</p>
+            <p> 1,3 </p> <p>→ Precedencia: antes de ejecutar 3ª tarea hay que ejecutar 1ª</p>
+            <p> 3,4 </p> <p>→ Precedencia: antes de ejecutar 4ª tarea hay que ejecutar 3ª</p>
+            <p> 4,5 </p> <p>→ Precedencia: antes de ejecutar 5ª tarea hay que ejecutar 4ª</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="{% static 'js/service.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/slides.js' %}"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+
+
+</body>
+
+</html>
