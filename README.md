@@ -1,11 +1,11 @@
 # Balancing-Genes
 Software de modelización, diseñado con el objetivo de optimizar la producción de cadenas de montaje. 
 
----------------------------------------------------------------README------------------------------------------------------------------
+--------------------------------------------------README--------------------------------------------------------
 
 Este es un documento que explica los pasos necesarios para la puesta en marcha del programa tanto de forma aislada como en la página web
 
--------------------------------------------------------------INSTALACION---------------------------------------------------------------
+------------------------------------------------INSTALACION------------------------------------------------------
 
 Esta acción se puede realizar desde cualquier directorio.
 
@@ -13,16 +13,18 @@ Para la ejecución son necesarias las librerías de numpy y de Django, para las 
 
 
 - pip install numpy
+
+- pip install matplotlib
  
 - python -m pip install Django
 
 
---------------------------------------------------------------EJECUCION-----------------------------------------------------------------
+--------------------------------------------------EJECUCION------------------------------------------------------
 
 Ejecución del programa de forma aislada:
 
 Primero es necesario modificar el archivo con los valores que se desea probar en la parte superior.
-Después se debe ejecutar el programa de Python desde el compilador que se disponga.
+Después se debe ejecutar el programa.
 
 De esta forma obtenemos información en tiempo real de los cálculos que se están realizando.
 
